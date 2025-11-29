@@ -1,4 +1,23 @@
 {
   "name": "zalosheet",
-  "packageManager": "yarn@4.9.1"
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "build": "tsdown",
+    "start": "node dist/index.mjs"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "google-auth-library": "^10.5.0",
+    "google-spreadsheet": "^5.0.2",
+    "pino": "^10.1.0",
+    "puppeteer": "^24.31.0",
+    "zod": "^4.1.13"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^6.2.0",
+    "eslint": "^9.39.1",
+    "tsdown": "^0.17.0-beta.1",
+    "typescript": "^5.9.3"
+  }
 }
