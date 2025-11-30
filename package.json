@@ -1,12 +1,17 @@
 {
   "name": "zalosheet",
+  "version": "1.0.0",
+  "description": "Automated Zalo messaging bot that sends bulk messages based on Google Sheets data",
+  "license": "MIT",
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "build": "tsdown",
-    "start": "node dist/index.mjs"
+    "start": "node dist/index.mjs",
+    "dev": "tsdown --watch --onSuccess \"node dist/index.mjs\""
   },
   "dependencies": {
+    "dayjs": "^1.11.19",
     "dotenv": "^17.2.3",
     "google-auth-library": "^10.5.0",
     "google-spreadsheet": "^5.0.2",

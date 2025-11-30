@@ -4,6 +4,11 @@ import { env } from '@/env'
 import { getWorksheet } from '@/libs/sheet'
 import { ReceiverSchema } from '@/schemas/receiver'
 
+/**
+ * Fetches all message receivers from the configured Google Spreadsheet
+ * @returns Promise that resolves to an array of validated Receiver objects
+ * @throws ZodError if the spreadsheet data doesn't match the expected schema
+ */
 export async function getAllReceivers() {
   const sheet = await getWorksheet(env.SHEET_ID, env.SHEET_TITLE)
 

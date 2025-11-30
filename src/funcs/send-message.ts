@@ -1,9 +1,19 @@
 import type { Page } from 'puppeteer'
 import logger from '@/libs/logger'
 import { AppError } from '@/utils/error'
-import { sleep } from '@/utils/sleep'
 
-export async function sendMessage({ content, phone, page, onNotFound, onError, onSuccess}: {
+/**
+ * Sends a message to a Zalo contact via Puppeteer automation
+ * @param options - Configuration object
+ * @param options.page - Puppeteer Page instance with Zalo Web loaded
+ * @param options.phone - Recipient's phone number
+ * @param options.content - Message content to send
+ * @param options.onNotFound - Optional callback when contact is not found
+ * @param options.onError - Optional callback when an error occurs
+ * @param options.onSuccess - Optional callback when message is sent successfully
+ * @returns Promise that resolves to false on failure, undefined on success
+ */
+export async function sendMessage({ content, phone, page, onNotFound, onError, onSuccess }: {
   page: Page
   phone: string
   content: string
@@ -21,7 +31,7 @@ export async function sendMessage({ content, phone, page, onNotFound, onError, o
     await searchEl.focus()
     await searchEl.click({ clickCount: 2 })
     await page.keyboard.press('Backspace')
-    await page.keyboard.type(phone)
+    await page.keyboard.sendCharacter(phone)
 
     const firstContactEl = await page.$('#searchResultList [id^="friend-item-"]')
     const notFoundEl = await page.$('#searchResultList .global-search-no-result')
@@ -59,7 +69,7 @@ export async function sendMessage({ content, phone, page, onNotFound, onError, o
     })
 
     await page.keyboard.press('Backspace')
-    await page.keyboard.type(content)
+    await page.keyboard.sendCharacter(content)
     await page.keyboard.press('Enter')
     await onSuccess?.()
     logger.info(`Message sent to ${phone}`)
