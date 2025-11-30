@@ -31,7 +31,11 @@ export async function zaloBotSendMany(browser: Browser) {
 
   await page.waitForSelector('#app .form-signin .qrcode img').catch(() => {
     logger.info('Please login to Zalo Web')
-  })
+  }).then(
+    () => {
+      logger.info('Please login to Zalo Web by scanning the QR code')
+    },
+  )
 
   await page.reload()
 
